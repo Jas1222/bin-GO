@@ -1,21 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { DiscoveryScreen } from './components/discovery/DiscoveryScreen'
+import { SubmitScreen } from './components/submit/SubmitScreen'
+import { data } from './mockData';
 
-export default function App() {
+const Tab = createBottomTabNavigator()
+
+export default function App () {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Find a Bin" component={DiscoveryScreen}/>
+        <Tab.Screen name="Submit a Bin" component={SubmitScreen}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
