@@ -4,6 +4,7 @@ import MapView, { Marker } from 'react-native-maps'
 import { data } from '../../mockData'
 import * as Location from 'expo-location'
 import { COLORS } from '../../Colors'
+import { regionFrom } from '../../utils/MapUtils.js'
 
 const styles = StyleSheet.create({
   container: {
@@ -23,22 +24,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   }
 })
-
-// Extract into a utility
-const regionFrom = (lat, lon, accuracy) => {
-  const oneDegreeOfLongitudeInMeters = 111.32 * 1000
-  const circumference = (40075 / 360) * 1000
-
-  const latDelta = accuracy * (1 / (Math.cos(lat) * circumference))
-  const lonDelta = (accuracy / oneDegreeOfLongitudeInMeters)
-
-  return {
-    latitude: lat,
-    longitude: lon,
-    latitudeDelta: Math.max(0, latDelta),
-    longitudeDelta: Math.max(0, lonDelta)
-  }
-}
 
 export const DiscoveryScreen = () => {
   const [location, setLocation] = useState({ latitude: 0, longitude: 0, latitudeDelta: 0, longitudeDelta: 0 })
@@ -90,7 +75,7 @@ export const DiscoveryScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
-        {'Bins Near Me'}
+        {'Bins near me'}
       </Text>
 
       {renderMap()}
