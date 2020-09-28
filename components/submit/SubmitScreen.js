@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.PASTEL_TEAL
   },
   header: {
-    fontSize: 30,
+    fontSize: 20,
     textAlign: 'center',
     color: COLORS.DARK_TEAL,
     marginBottom: 10,
