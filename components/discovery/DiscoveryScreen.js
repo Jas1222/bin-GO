@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
-import { data } from '../../mockData'
 import * as Location from 'expo-location'
 import { COLORS } from '../../Colors'
 import { regionFrom } from '../../utils/MapUtils.js'
+import { fetchBinLocations } from '../../network/NetworkService'
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
 
 export const DiscoveryScreen = () => {
   const [location, setLocation] = useState({ latitude: 0, longitude: 0, latitudeDelta: 0, longitudeDelta: 0 })
+  const [bins, setBins] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState(null)
 
@@ -42,13 +43,19 @@ export const DiscoveryScreen = () => {
       const transformedCoords = regionFrom(location.coords.latitude, location.coords.longitude, 150)
 
       setLocation(transformedCoords)
+
+      const result = await fetchBinLocations()
+      if (result && result.length > 0) {
+        setBins(result)
+      }
+
       setIsLoading(false)
     })()
   }, [])
 
   const renderBinLocations = () => {
 
-    return data.map( (marker, index) => (
+    return bins.map( (marker, index) => (
       <Marker coordinate={marker} key={index} pinColor={'green'} />
     ))
   }

@@ -4,6 +4,7 @@ import { COLORS } from '../../Colors'
 import * as Location from 'expo-location'
 import MapView, { Marker } from 'react-native-maps'
 import { regionFrom } from '../../utils/MapUtils'
+import { submitBinLocation } from '../../network/NetworkService'
 
 const styles = StyleSheet.create({
   container: {
@@ -59,6 +60,7 @@ export const SubmitScreen = () => {
   }
 
   const onSubmitPress = () => {
+      submitBinLocation(pinLocation)
       Alert.alert('Sent!', 'Thank you for contributing, every bin you find increases the chances of less litter on our streets.')
   }
 
