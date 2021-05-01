@@ -17,11 +17,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jas1222.binGO"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "sdkVersion": "39.0.0", "platforms": [ "ios", "android" ]
+    "sdkVersion": "39.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ]
   }
 }
